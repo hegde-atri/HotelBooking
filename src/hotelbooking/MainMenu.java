@@ -65,6 +65,7 @@ public class MainMenu extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hotel Cost Calculator");
         getContentPane().setLayout(null);
 
         copyright.setText("Atri Hegde © ");
@@ -229,10 +230,25 @@ public class MainMenu extends javax.swing.JFrame {
         if (!allInfo || duration == 0) {
             missingInformation.setVisible(true);
             understood.setVisible(true);
-        }
+            //receipt.setVisible(false);  not working as intended
+            cost1.setVisible(false);
+            cost2.setVisible(false);
+            perDay.setVisible(false);
+            semiTotal.setVisible(false);
+            discountLabel.setVisible(false);
+            totalCostLabel.setVisible(false);
+        }else{
 
         getCost();
         receipt.setVisible(true);
+        cost1.setVisible(true);
+        cost2.setVisible(true);
+        perDay.setVisible(true);
+        semiTotal.setVisible(true);
+        discountLabel.setVisible(true);
+        totalCostLabel.setVisible(true);
+        }
+        
     }//GEN-LAST:event_calculateActionPerformed
 
     private void understoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_understoodActionPerformed
@@ -290,9 +306,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         
  
-        cost1.setText    ("Room Charge (per day)    :    £" + roomCost);
-        cost2.setText    ("Meal charge (per day)        :    £" + mealCost);
-        perDay.setText   ("            (per day)                   :    £" + (roomCost + mealCost));
+        cost1.setText    ("Room Charge (per day)   :    £" + roomCost);
+        cost2.setText    ("Meal Charge    (per day)    :    £" + mealCost);
+        perDay.setText   ("Per Day                                :    £" + (roomCost + mealCost));
         semiTotal.setText("Total                        :    £" + cost);
         discountLabel.setText("Discount                 :    £" + discount + "   (based on duration)");
         totalCostLabel.setText("Grand Total              :    £" + totalCost);
