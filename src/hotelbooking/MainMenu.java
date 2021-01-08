@@ -6,6 +6,7 @@
 package hotelbooking;
 
 import javax.swing.JComboBox;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -13,11 +14,13 @@ import javax.swing.JComboBox;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    private int roomChoice;
-    private int mealChoice;
+    private double roomCost;
+    private double mealCost;
     private int duration;
+    private double price;
+    private boolean allInfo;
     private String[] roomDropDownMenu = {"", "Single (1) [£50]", "Double (2) [75]", "Family (4) [£105]"};
-    private String[] mealDropDownMenu = {"", "self-catering", "half-board", "full board"};
+    private String[] mealDropDownMenu = {"", "self-catering [£0]", "half-board [£10]", "full board [£20]"};
 
     /**
      * Creates new form MainMenu
@@ -25,6 +28,9 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
 
         initComponents();
+        missingInformation.setVisible(false);
+        understood.setVisible(false);
+        receipt.setVisible(false);
 
         roomSize.setModel(new javax.swing.DefaultComboBoxModel<>(roomDropDownMenu));
         mealService.setModel(new javax.swing.DefaultComboBoxModel<>(mealDropDownMenu));
@@ -39,8 +45,17 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        receipt = new javax.swing.JPanel();
+        costLabel = new javax.swing.JLabel();
+        discountLabel = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        understood = new javax.swing.JButton();
+        calculate = new javax.swing.JButton();
+        missingInformation = new javax.swing.JLabel();
+        durationSpinner = new javax.swing.JSpinner();
         mealService = new javax.swing.JComboBox<>();
         roomSize = new javax.swing.JComboBox<>();
+        headingThree = new javax.swing.JLabel();
         headingTwo = new javax.swing.JLabel();
         headingOne = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -48,13 +63,74 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        receipt.setBackground(new java.awt.Color(204, 204, 204));
+
+        costLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        discountLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        totalLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout receiptLayout = new javax.swing.GroupLayout(receipt);
+        receipt.setLayout(receiptLayout);
+        receiptLayout.setHorizontalGroup(
+            receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receiptLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(costLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(discountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE))
+        );
+        receiptLayout.setVerticalGroup(
+            receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receiptLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(costLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(discountLabel)
+                .addGap(18, 18, 18)
+                .addComponent(totalLabel)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(receipt);
+        receipt.setBounds(290, 330, 450, 100);
+
+        understood.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        understood.setText("Understood!");
+        understood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                understoodActionPerformed(evt);
+            }
+        });
+        getContentPane().add(understood);
+        understood.setBounds(490, 580, 100, 21);
+
+        calculate.setText("Calculate");
+        calculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(calculate);
+        calculate.setBounds(470, 440, 100, 23);
+
+        missingInformation.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
+        missingInformation.setText("1 or more missing data!!");
+        getContentPane().add(missingInformation);
+        missingInformation.setBounds(420, 550, 240, 30);
+        getContentPane().add(durationSpinner);
+        durationSpinner.setBounds(590, 150, 150, 20);
+
         mealService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mealServiceActionPerformed(evt);
             }
         });
         getContentPane().add(mealService);
-        mealService.setBounds(550, 290, 150, 20);
+        mealService.setBounds(590, 260, 150, 20);
 
         roomSize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,17 +138,22 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(roomSize);
-        roomSize.setBounds(550, 190, 150, 20);
+        roomSize.setBounds(590, 200, 150, 20);
+
+        headingThree.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        headingThree.setText("                           Duration:");
+        getContentPane().add(headingThree);
+        headingThree.setBounds(250, 150, 220, 20);
 
         headingTwo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         headingTwo.setText("  Choose meal service:");
         getContentPane().add(headingTwo);
-        headingTwo.setBounds(300, 280, 190, 30);
+        headingTwo.setBounds(290, 250, 190, 30);
 
         headingOne.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         headingOne.setText("     Choose room type:");
         getContentPane().add(headingOne);
-        headingOne.setBounds(300, 180, 190, 40);
+        headingOne.setBounds(290, 190, 190, 40);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/15e8fd101fe6a744c3a2fb7b5e092587.png"))); // NOI18N
         getContentPane().add(background);
@@ -92,18 +173,47 @@ public class MainMenu extends javax.swing.JFrame {
                 x = i;
             }
         }
+        if (cmbType.equals("") || cmbType.equals(null)) {
+            x = 4;
+        }
         switch (x) {
             case 1:
+                allInfo = true;
+                mealCost = 0;
                 break;
             case 2:
+                allInfo = true;
+                mealCost = 10;
                 break;
             case 3:
+                allInfo = true;
+                mealCost = 20;
+                System.out.println(mealCost);
+                break;
+            case 4:
+                allInfo = false;
                 break;
             default:
                 System.out.println("Error: Switch statement no functioning as intended");
         }
 
     }//GEN-LAST:event_mealServiceActionPerformed
+
+    private void calculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateActionPerformed
+        duration = (Integer)durationSpinner.getValue();
+        if (!allInfo || duration == 0) {
+            missingInformation.setVisible(true);
+            understood.setVisible(true);
+        }
+
+        getCost();
+        receipt.setVisible(true);
+    }//GEN-LAST:event_calculateActionPerformed
+
+    private void understoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_understoodActionPerformed
+        missingInformation.setVisible(false);
+        understood.setVisible(false);
+    }//GEN-LAST:event_understoodActionPerformed
 
     private void roomSizeActionPerformed(java.awt.event.ActionEvent evt) {
         JComboBox jcmbType = (JComboBox) evt.getSource();
@@ -116,12 +226,24 @@ public class MainMenu extends javax.swing.JFrame {
                 x = i;
             }
         }
+        if (cmbType.equals("") || cmbType.equals(null)) {
+            x = 4;
+        }
         switch (x) {
             case 1:
+                allInfo = true;
+                roomCost = 50;
                 break;
             case 2:
+                allInfo = true;
+                roomCost = 75;
                 break;
             case 3:
+                allInfo = true;
+                roomCost = 105;
+                break;
+            case 4:
+                allInfo = false;
                 break;
             default:
                 System.out.println("Error: Switch statement no functioning as intended");
@@ -129,9 +251,27 @@ public class MainMenu extends javax.swing.JFrame {
 
     }
 
-    /**
-     * @param args the command line arguments
-     */
+    private void getCost() {
+        double cost;
+        double discount = 0;
+        double totalCost;
+
+        if (duration > 7) {
+            discount = ((roomCost + mealCost) * 0.2) * (duration - 7);
+        }
+        System.out.println(duration);
+        System.out.println(roomCost);
+        System.out.println(mealCost);
+        cost = (roomCost + mealCost) * duration;
+        totalCost = cost - discount;
+
+        System.out.println("Cost  (without discount) :       £" + cost);
+        costLabel.setText("Cost  (without discount) :       £" + cost);
+        discountLabel.setText("Discount                           :        £" + discount);
+        totalLabel.setText("Total Cost                :      £" + totalCost);
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -166,9 +306,18 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton calculate;
+    private javax.swing.JLabel costLabel;
+    private javax.swing.JLabel discountLabel;
+    private javax.swing.JSpinner durationSpinner;
     private javax.swing.JLabel headingOne;
+    private javax.swing.JLabel headingThree;
     private javax.swing.JLabel headingTwo;
     private javax.swing.JComboBox<String> mealService;
+    private javax.swing.JLabel missingInformation;
+    private javax.swing.JPanel receipt;
     private javax.swing.JComboBox<String> roomSize;
+    private javax.swing.JLabel totalLabel;
+    private javax.swing.JButton understood;
     // End of variables declaration//GEN-END:variables
 }
