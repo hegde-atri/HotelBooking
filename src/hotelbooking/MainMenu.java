@@ -69,7 +69,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         copyright.setText("Atri Hegde © ");
         getContentPane().add(copyright);
-        copyright.setBounds(944, 660, 70, 14);
+        copyright.setBounds(920, 620, 80, 20);
 
         receipt.setBackground(new java.awt.Color(204, 204, 204));
 
