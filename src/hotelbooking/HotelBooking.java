@@ -4,7 +4,8 @@ package hotelbooking;
 public class HotelBooking {
     
     
-    
+    public String[][] size;
+    public String[][] meal; 
     
     /*
     A hotel needs a new toom booking system for their rooms.
@@ -20,9 +21,17 @@ public class HotelBooking {
     */
 
     
-    public static void main(String[] args) {
-        System.out.println("Just started!");
+    public void costCalculator(int size, int meal, int days){
         
+        
+        
+    }
+        
+    
+    public static void main(String[] args) {
+        MainMenu mm = new MainMenu();
+        mm.setSize(1024,682);
+        mm.setVisible(true);
         
     }
     
