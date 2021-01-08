@@ -45,10 +45,14 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        copyright = new javax.swing.JLabel();
         receipt = new javax.swing.JPanel();
-        costLabel = new javax.swing.JLabel();
+        cost1 = new javax.swing.JLabel();
+        cost2 = new javax.swing.JLabel();
+        perDay = new javax.swing.JLabel();
+        semiTotal = new javax.swing.JLabel();
         discountLabel = new javax.swing.JLabel();
-        totalLabel = new javax.swing.JLabel();
+        totalCostLabel = new javax.swing.JLabel();
         understood = new javax.swing.JButton();
         calculate = new javax.swing.JButton();
         missingInformation = new javax.swing.JLabel();
@@ -63,13 +67,24 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        copyright.setText("Atri Hegde © ");
+        getContentPane().add(copyright);
+        copyright.setBounds(944, 660, 70, 14);
+
         receipt.setBackground(new java.awt.Color(204, 204, 204));
 
-        costLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cost1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        cost2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        perDay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        semiTotal.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         discountLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        totalLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        totalCostLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        totalCostLabel.setText("jLabel1");
 
         javax.swing.GroupLayout receiptLayout = new javax.swing.GroupLayout(receipt);
         receipt.setLayout(receiptLayout);
@@ -77,26 +92,36 @@ public class MainMenu extends javax.swing.JFrame {
             receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receiptLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(costLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(discountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addGroup(receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cost1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cost2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(perDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(semiTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(discountLabel)
+                    .addComponent(totalCostLabel))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
         receiptLayout.setVerticalGroup(
             receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receiptLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(costLabel)
+                .addComponent(cost1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(discountLabel)
+                .addComponent(cost2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(perDay)
                 .addGap(18, 18, 18)
-                .addComponent(totalLabel)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(semiTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(discountLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(totalCostLabel)
+                .addContainerGap())
         );
 
         getContentPane().add(receipt);
-        receipt.setBounds(290, 330, 450, 100);
+        receipt.setBounds(300, 330, 450, 170);
 
         understood.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         understood.setText("Understood!");
@@ -106,7 +131,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(understood);
-        understood.setBounds(490, 580, 100, 21);
+        understood.setBounds(480, 580, 100, 21);
 
         calculate.setText("Calculate");
         calculate.addActionListener(new java.awt.event.ActionListener() {
@@ -115,12 +140,12 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(calculate);
-        calculate.setBounds(470, 440, 100, 23);
+        calculate.setBounds(470, 510, 100, 23);
 
         missingInformation.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
-        missingInformation.setText("1 or more missing data!!");
+        missingInformation.setText("Insuffecient data");
         getContentPane().add(missingInformation);
-        missingInformation.setBounds(420, 550, 240, 30);
+        missingInformation.setBounds(440, 550, 170, 30);
         getContentPane().add(durationSpinner);
         durationSpinner.setBounds(590, 150, 150, 20);
 
@@ -259,16 +284,18 @@ public class MainMenu extends javax.swing.JFrame {
         if (duration > 7) {
             discount = ((roomCost + mealCost) * 0.2) * (duration - 7);
         }
-        System.out.println(duration);
-        System.out.println(roomCost);
-        System.out.println(mealCost);
+        
         cost = (roomCost + mealCost) * duration;
         totalCost = cost - discount;
 
-        System.out.println("Cost  (without discount) :       £" + cost);
-        costLabel.setText("Cost  (without discount) :       £" + cost);
-        discountLabel.setText("Discount                           :        £" + discount);
-        totalLabel.setText("Total Cost                :      £" + totalCost);
+        
+ 
+        cost1.setText    ("Room Charge (per day)    :    £" + roomCost);
+        cost2.setText    ("Meal charge (per day)        :    £" + mealCost);
+        perDay.setText   ("            (per day)                   :    £" + (roomCost + mealCost));
+        semiTotal.setText("Total                        :    £" + cost);
+        discountLabel.setText("Discount                 :    £" + discount + "   (based on duration)");
+        totalCostLabel.setText("Grand Total              :    £" + totalCost);
 
     }
 
@@ -307,7 +334,9 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton calculate;
-    private javax.swing.JLabel costLabel;
+    private javax.swing.JLabel copyright;
+    private javax.swing.JLabel cost1;
+    private javax.swing.JLabel cost2;
     private javax.swing.JLabel discountLabel;
     private javax.swing.JSpinner durationSpinner;
     private javax.swing.JLabel headingOne;
@@ -315,9 +344,11 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel headingTwo;
     private javax.swing.JComboBox<String> mealService;
     private javax.swing.JLabel missingInformation;
+    private javax.swing.JLabel perDay;
     private javax.swing.JPanel receipt;
     private javax.swing.JComboBox<String> roomSize;
-    private javax.swing.JLabel totalLabel;
+    private javax.swing.JLabel semiTotal;
+    private javax.swing.JLabel totalCostLabel;
     private javax.swing.JButton understood;
     // End of variables declaration//GEN-END:variables
 }
